@@ -1,0 +1,26 @@
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  codePush:
+    name: Code Push
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v2
+      - name: Install Dependencies
+        run: |
+            flutter clean
+            flutter pub get
+      - name: Deploy to Codepush
+        uses: NishanthShankar/codepush-action@master
+        with:
+          args: release-react --app Miraç Altun/flutterboy20-dictionary_app -d Staging
+        env:
+          APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}

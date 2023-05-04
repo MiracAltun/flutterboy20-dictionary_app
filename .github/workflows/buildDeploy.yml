@@ -1,0 +1,27 @@
+name: Build And Deploy
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - new-release
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      - name: Install Dependencies
+        run: |
+            flutter clean
+            flutter pub get
+      - name: Build apk
+        run: flutter build apk --split-per-abi
+      - name: Deploy to Codepush
+        uses: NishanthShankar/codepush-action@master
+        with:
+          args: distribute release-react -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Miraç Altun/flutterboy20-dictionary_app
+        env:
+          APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
