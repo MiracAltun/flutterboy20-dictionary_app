@@ -1,23 +1,23 @@
-name: Build and Deploy
+name: Build And Deploy
+
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ "main" ]
+    tags:
+      - new-release
+
 
 jobs:
-  codePush:
-    name: Code Push
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Install Dependencies
-        run: |
-            flutter clean
-            flutter pub get
+        uses: subosito/flutter-action@v2
+      - run: |
+          flutter clean
+          flutter pub get
       - name: Deploy to Codepush
         uses: NishanthShankar/codepush-action@master
         with:
