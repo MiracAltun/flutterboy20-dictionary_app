@@ -20,10 +20,11 @@ jobs:
           flutter pub get
       - name: Build apk
         uses: subosito/flutter-action@v2
-      - run: flutter build apk --split-per-abi
+      - run: |
+          flutter build apk --split-per-abi
+          ls build/outputs/flutter-apk/
       - name: Deploy to App Center
         uses: avocaddo/AppCenter-Github-Action@v1.0.2
         with:
           token: ${{secrets.APP_CENTER_ACCESS_TOKEN}}
-          command: appcenter distribute release -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Dictionary-app/flutterboy20-dictionary_app
-        
+          command: appcenter distribute release -f build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Dictionary-app/flutterboy20-dictionary_app
