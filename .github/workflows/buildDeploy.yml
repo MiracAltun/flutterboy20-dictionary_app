@@ -21,9 +21,9 @@ jobs:
       - name: Build apk
         uses: subosito/flutter-action@v2
       - run: flutter build apk --split-per-abi
-      - name: Deploy to Codepush
-        uses: NishanthShankar/codepush-action@master
+      - name: Deploy to App Center
+        uses: avocaddo/AppCenter-Github-Action@v1.0.2
         with:
-          args: distribute release-react -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Miraç Altun/flutterboy20-dictionary_app
-        env:
-          APPCENTER_ACCESS_TOKEN: ${{ secrets.APPCENTER_ACCESS_TOKEN }}
+          token: ${{secrets.APP_CENTER_ACCESS_TOKEN}}
+          command: appcenter distribute release -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Miraç Altun/flutterboy20-dictionary_app
+        
