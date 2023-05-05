@@ -21,6 +21,6 @@ jobs:
       - name: Deploy to Codepush
         uses: NishanthShankar/codepush-action@master
         with:
-          args: release --app flutterboy20-dictionary_app -c ${{ github.workspace}} -d Staging
+          args: release --app Dictionary-app/flutterboy20-dictionary_app -c ${{ github.workspace}} -d Staging --target-binary-version 1.0.1
         env:
           APPCENTER_ACCESS_TOKEN: ${{ secrets.APP_CENTER_ACCESS_TOKEN }}
