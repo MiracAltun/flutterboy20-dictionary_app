@@ -25,5 +25,5 @@ jobs:
         uses: avocaddo/AppCenter-Github-Action@v1.0.2
         with:
           token: ${{secrets.APP_CENTER_ACCESS_TOKEN}}
-          command: appcenter distribute release -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app Miraç Altun/flutterboy20-dictionary_app
+          command: appcenter distribute release -f android/app/build/outputs/flutter-apk/app-armeabi-v7a-release.apk -g Collaborators --app flutterboy20-dictionary_app
         
